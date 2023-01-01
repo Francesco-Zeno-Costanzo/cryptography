@@ -6,7 +6,7 @@ def cesar(msg, key, enc):
 
     Parameters
     ----------
-    msg : string or 1darray
+    msg : string
         message to encrypt or decrypt
     key : int
         encryption key
@@ -15,41 +15,52 @@ def cesar(msg, key, enc):
 
     Return
     ------
-    msg_e : 1d array
-        encrypted message
-    or
-    msg_d_text : string
-        decrypted message
+    msg_c : string
+        encrypted message or decrypted message
     """
-    if enc :
-        N = len(msg)
+    if not enc :
+        key = - key #for decrypt
 
-        #from char to number
-        msg_e  = np.zeros(N, dtype='int64')
-        for i, l in enumerate(msg):
-            msg_e[i] = ord(l)
+    msg_c = ""      #final message
 
-        msg_e += key
+    for l in msg:   #loop over original message
 
-        return msg_e
+        if l.isalpha():                        #historically only the letters are encrypted
 
-    else :
-        msg_d = msg - key
+            val = ord(l)                       #from char to number
+            val += key                         #encryption or decryption
 
-        #from number to char
-        msg_d_text = ""
-        for l in msg_d:
-            msg_d_text += chr(l)
+            if l.isupper():                    #if l in msg is upper also in msg_c will be upper
+                if val > ord('Z'): val -= 26   #periodical bounday condition
+                if val < ord('A'): val += 26
+            elif l.islower():                  #if l in msg is lower also in msg_c will be lower
+                if val > ord('z'): val -= 26   #periodical bounday condition
+                if val < ord('a'): val += 26
 
-        return msg_d_text
+            msg_c += chr(val)    #output message must be a string
+
+        else:
+            msg_c += l           #the other characters are not encrypted
+
+    return msg_c
+
+if __name__ == "__main__":
+
+    enc = int(input("Press 0 for decryption, 1 for encryption:\n"))
+
+    text = input("\ninsert message:\n")
+
+    print("\nThe key must be a number between 1 and 26, \n"
+          "if you enter 27 it will be like having entered 1 and so on,\n"
+          "the 0 key does not change the message\n")
+
+    key = int(input("insert key:\n"))
 
 
-text = 'Hi, how are you? Todo bien. Maremma canguro'
-key = 15
+    #text = 'Hi, how are you? Todo bien. Maremma canguro'
+    #key = 13
 
-msg_enc = cesar(text, key, enc=True)
-print("crypted message:\n", msg_enc)
+    msg_enc = cesar(text, key, enc=enc)
+    print("\nOutput message message:\n", msg_enc)
 
-msg_dec = cesar(msg_enc, key, enc=False)
-print("encrypted message:\n", msg_dec)
 
