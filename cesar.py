@@ -1,4 +1,6 @@
-import numpy as np
+"""
+Caesar cipher
+"""
 
 def cesar(msg, key, enc):
     """
@@ -11,7 +13,7 @@ def cesar(msg, key, enc):
     key : int
         encryption key
     enc : bool
-        True for encrypt mesg, False to decrypt msg
+        True for encrypt msg, False to decrypt msg
 
     Return
     ------
@@ -43,6 +45,7 @@ def cesar(msg, key, enc):
             msg_c += l           #the other characters are not encrypted
 
     return msg_c
+
 
 if __name__ == "__main__":
 
