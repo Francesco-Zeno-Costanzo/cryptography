@@ -39,7 +39,6 @@ def vigenere(msg, key, enc):
                 l = l.lower()         #change again
 
             val_m = al_to_nu[l]
-            print(l, al_to_nu)
             val_k = al_to_nu[key[i % len(key)]]
 
             if not enc :
