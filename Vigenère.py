@@ -24,7 +24,7 @@ def vigenere(msg, key, enc):
     
     key = key.lower()
     alfabeto = 'abcdefghijklmnopqrstuvwxyz'                    #alfabeto
-    al_to_nu = dict(zip(alfabeto, range(0, 25)))               #from letter to number
+    al_to_nu = dict(zip(alfabeto, range(0, 26)))               #from letter to number
     nu_to_al = dict(zip(al_to_nu.values(), al_to_nu.keys()))   #from number to letter
 
     msg_c = ""                        #final message
@@ -39,6 +39,7 @@ def vigenere(msg, key, enc):
                 l = l.lower()         #change again
 
             val_m = al_to_nu[l]
+            print(l, al_to_nu)
             val_k = al_to_nu[key[i % len(key)]]
 
             if not enc :
