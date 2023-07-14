@@ -21,6 +21,8 @@ def vigenere(msg, key, enc):
     msg_c : string
         encrypted message or decrypted message
     """
+    
+    key = key.lower()
     alfabeto = 'abcdefghijklmnopqrstuvwxyz'                    #alfabeto
     al_to_nu = dict(zip(alfabeto, range(0, 25)))               #from letter to number
     nu_to_al = dict(zip(al_to_nu.values(), al_to_nu.keys()))   #from number to letter
