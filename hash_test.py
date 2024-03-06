@@ -8,14 +8,14 @@ from hash_constant import *
 
 msg = "ok this is a test, mabey all will be good"
 
-result_lib = hashlib.sha256(b"ok this is a test, mabey all will be good").hexdigest()
 
 class TESTS(unittest.TestCase):
 
     def test_sha256(self):
         ''' Litte test
         '''
-        result = sha_256(msg)
+        result     = sha_256(msg)
+        result_lib = hashlib.sha256(msg.encode('utf-8')).hexdigest()
 
         print("res:", result)
         print("lib:", result_lib)
